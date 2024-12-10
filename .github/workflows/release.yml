@@ -1,4 +1,4 @@
-name: Release
+name: release
 on:
   push:
     tags:
@@ -15,36 +15,36 @@ jobs:
             target: "arm64"
           - platform: windows-latest
             target: ""
-      runs-on: ${{ matrix.platform }}
-      steps:
-        - name: Clone source
-          uses: actions/checkout@v4
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Clone source
+        uses: actions/checkout@v4
         
-        - name: Python setup
-          uses: actions/setup-python@v5
-          with:
-            python-version: "3.12"
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-        - name: Build with pyinstaller
-          run: |
-            pyinstaller --onedir --console \
-              --icon "NONE" \
-              --name league-ui-modifier \
-              --contents-directory deps \
-              --add-data schemes:schemes \
-              --target-arch ${{ matrix.target }} \
-              src/main.py
+      - name: Build with pyinstaller
+        run: |
+          pyinstaller --onedir --console \
+            --icon "NONE" \
+            --name league-ui-modifier \
+            --contents-directory deps \
+            --add-data schemes:schemes \
+            --target-arch ${{ matrix.target }} \
+            src/main.py
 
-        - name: Package
-          run: |
-            7z a league-ui-modifier.zip dist/
+      - name: Package
+        run: |
+          7z a league-ui-modifier.zip dist/
 
-        - name: Release
-          uses: softprops/action-gh-release@v2
-          with:
-            files: league-ui-modifier.zip
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: league-ui-modifier.zip
