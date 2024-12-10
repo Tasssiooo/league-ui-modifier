@@ -48,8 +48,10 @@ jobs:
             src/main.py
 
       - name: Package
+        shell: bash
         run: |
-          7z a league-ui-modifier-${{ matrix.id }}.zip dist/league-ui-modifier/
+          mv ./dist/league-ui-modifier/ ./
+          7z a league-ui-modifier-${{ matrix.id }}.zip league-ui-modifier/
 
       - name: Release
         uses: softprops/action-gh-release@v2
