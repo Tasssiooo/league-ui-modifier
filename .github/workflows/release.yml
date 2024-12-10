@@ -14,10 +14,13 @@ jobs:
         include:
           - platform: macos-latest
             target: "x86_64"
+            id: "macos-x86_64"
           - platform: macos-latest
             target: "arm64"
+            id: "macos-arm64"
           - platform: windows-latest
             target: ""
+            id: "windows"
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Clone source
@@ -34,6 +37,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build with pyinstaller
+        shell: bash
         run: |
           pyinstaller --onedir --console \
             --icon "NONE" \
@@ -45,7 +49,7 @@ jobs:
 
       - name: Package
         run: |
-          7z a league-ui-modifier.zip dist/
+          7z a league-ui-modifier-${{ matrix.id }}.zip dist/league-ui-modifier/
 
       - name: Release
         uses: softprops/action-gh-release@v2
