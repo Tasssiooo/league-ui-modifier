@@ -92,7 +92,7 @@ def main(argv: list[str]) -> None:
                     uibase_entries = RE_ENTRIES.split(uibase_content)
 
                     # 'entries' is formatted as a map (map[hash, embed]), that pattern allows us
-                    # to split the uibase content using '\n(?=")' and iterate through them;
+                    # to split the uibase content using '\n    (?=\")' and iterate through them;
                     for i in range(1, len(uibase_entries)):
                         entry = uibase_entries[i]
 
