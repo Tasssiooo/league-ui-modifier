@@ -13,10 +13,10 @@ jobs:
       matrix:
         include:
           - platform: macos-latest
-            target: "x86_64"
+            target: "--target-arch x86_64"
             id: "macos-x86_64"
           - platform: macos-latest
-            target: "arm64"
+            target: "--target-arch arm64"
             id: "macos-arm64"
           - platform: windows-latest
             target: ""
@@ -44,7 +44,7 @@ jobs:
             --name league-ui-modifier \
             --contents-directory deps \
             --add-data schemes:schemes \
-            --target-arch ${{ matrix.target }} \
+            ${{ matrix.target }} \
             src/main.py
 
       - name: Package
@@ -54,4 +54,4 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: league-ui-modifier.zip
+          files: league-ui-modifier-${{ matrix.id }}.zip
