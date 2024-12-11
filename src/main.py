@@ -63,6 +63,8 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
 
             case "n" | "N":
                 print("Using default scheme...")
+            case _:
+                continue
 
         try:
             with open(f"deps/schemes/{scheme_name}", "r") as scheme_json:
