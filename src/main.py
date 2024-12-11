@@ -2,7 +2,7 @@ import sys
 import json
 import re
 
-from pathlib import Path
+from pathlib import Path, PurePath
 
 
 RE_ENTRIES = re.compile(r"\n    (?=\")")
@@ -67,7 +67,7 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
                 continue
 
         try:
-            with open(Path(f"./deps/schemes/{scheme_name}.json"), "r") as scheme_json:
+            with open(PurePath(f"deps/schemes/{scheme_name}.json"), "r") as scheme_json:
                 return json.load(scheme_json)
         except FileNotFoundError:
             input(f"Error: {scheme_name}.json not found!\nPress enter to exit...")
