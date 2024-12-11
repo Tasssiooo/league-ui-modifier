@@ -55,11 +55,11 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
     Otherwise, it returns the default scheme.
     """
     while True:
-        scheme_name = "default.json"
+        scheme_name = "default"
 
         match input("Do you want to use a custom scheme? [y/n]: "):
             case "y" | "Y":
-                scheme_name = Path(input("Scheme name: ")).with_suffix(".json")
+                scheme_name = input("Scheme name: ").removesuffix(".json")
 
             case "n" | "N":
                 print("Using default scheme...")
@@ -67,10 +67,10 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
                 continue
 
         try:
-            with open(f"deps/schemes/{scheme_name}", "r") as scheme_json:
+            with open(Path(f"./deps/schemes/{scheme_name}.json"), "r") as scheme_json:
                 return json.load(scheme_json)
         except FileNotFoundError:
-            input(f"Error: {scheme_name} not found!\nPress enter to exit...")
+            input(f"Error: {scheme_name}.json not found!\nPress enter to exit...")
             sys.exit(1)
         except json.JSONDecodeError as e:
             input(
