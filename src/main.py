@@ -1,6 +1,7 @@
 import sys
 import json
 import re
+import os
 
 from pathlib import Path, PurePath
 
@@ -55,7 +56,7 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
     Otherwise, it returns the default scheme.
     """
     while True:
-        scheme_path = PurePath("./deps/schemes/default.json")
+        scheme_path = PurePath(os.path.curdir + "/deps/schemes/default.json")
 
         print(scheme_path)
 
