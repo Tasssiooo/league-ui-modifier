@@ -65,7 +65,7 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
                 print("Using default scheme...")
 
         try:
-            with open(f"./deps/schemes/{scheme_name}", "r") as scheme_json:
+            with open(f"deps/schemes/{scheme_name}", "r") as scheme_json:
                 return json.load(scheme_json)
         except FileNotFoundError:
             input(f"Error: {scheme_name} not found!\nPress enter to exit...")
