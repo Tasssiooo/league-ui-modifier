@@ -56,9 +56,9 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
     Otherwise, it returns the default scheme.
     """
     while True:
-        scheme_path = Path("deps/schemes/default.json")
+        scheme_path = Path(__file__ + "deps/schemes/default.json")
 
-        print(scheme_path.absolute())
+        print(scheme_path)
 
         match input("Do you want to use a custom scheme? [y/n]: "):
             case "y" | "Y":
@@ -69,7 +69,7 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
                 continue
 
         try:
-            with open(scheme_path.absolute(), "r") as scheme_json:
+            with open(scheme_path, "r") as scheme_json:
                 return json.load(scheme_json)
         except FileNotFoundError:
             input(f"Error: {scheme_path.name} not found!\nPress enter to exit...")
