@@ -56,9 +56,7 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
     Otherwise, it returns the default scheme.
     """
     while True:
-        scheme_path = Path(__file__ + "deps/schemes/default.json")
-
-        print(scheme_path)
+        scheme_path = Path(__file__).parent / "schemes/default.json"
 
         match input("Do you want to use a custom scheme? [y/n]: "):
             case "y" | "Y":
@@ -67,7 +65,6 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
                 print("Using default scheme...")
             case _:
                 continue
-
         try:
             with open(scheme_path, "r") as scheme_json:
                 return json.load(scheme_json)
