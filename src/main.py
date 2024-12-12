@@ -3,7 +3,7 @@ import json
 import re
 import os
 
-from pathlib import Path, PurePath
+from pathlib import Path
 
 
 RE_ENTRIES = re.compile(r"\n    (?=\")")
@@ -56,21 +56,20 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
     Otherwise, it returns the default scheme.
     """
     while True:
-        scheme_path = PurePath(os.path.curdir + "/deps/schemes/default.json")
+        scheme_path = Path("deps/schemes/default.json")
 
-        print(scheme_path)
+        print(scheme_path.absolute())
 
         match input("Do you want to use a custom scheme? [y/n]: "):
             case "y" | "Y":
-                scheme_path.with_name(input("Scheme name: ")).with_suffix(".json")
-
+                scheme_path = scheme_path.with_name(input("Scheme name: ")).with_suffix(".json")
             case "n" | "N":
                 print("Using default scheme...")
             case _:
                 continue
 
         try:
-            with open(scheme_path, "r") as scheme_json:
+            with open(scheme_path.absolute(), "r") as scheme_json:
                 return json.load(scheme_json)
         except FileNotFoundError:
             input(f"Error: {scheme_path.name} not found!\nPress enter to exit...")
