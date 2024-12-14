@@ -57,11 +57,11 @@ def scheme_resolver() -> dict[str, dict[str, str]]:
     while True:
         scheme_name = "default.json"
 
-        match input("Do you want to use a custom scheme? [y/n]: "):
-            case "y" | "Y":
+        match input("Do you want to use a custom scheme? [y/n]: ").lower():
+            case "y" | "yes":
                 scheme_name = Path(input("Scheme name: ")).with_suffix(".json")
 
-            case "n" | "N":
+            case "n" | "no":
                 print("Using default scheme...")
             case _:
                 continue
