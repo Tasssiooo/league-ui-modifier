@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: macos-latest
+          - platform: macos-13
             target: "--target-arch x86_64"
             id: "macos-x86_64"
           - platform: macos-latest
@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Clone source
         uses: actions/checkout@v4
-        
+
       - name: Python setup
         uses: actions/setup-python@v5
         with:
