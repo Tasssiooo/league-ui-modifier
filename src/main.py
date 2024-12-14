@@ -11,12 +11,12 @@ RE_HASH = re.compile(
 )  # To ignore the scenes: \"[\w/]+(_\w+)+\"\s(?==)
 
 
-def update(scheme: dict[str, dict[str, str]], entry: str) -> str:
+def update(scheme: dict, entry: str) -> str:
     """
     Modifies the entry according to the scheme, then returns a str.
     """
 
-    def recursive(value, key: str, entry: str):
+    def recursive(value: dict, key: str, entry: str):
 
         if key in value:
             for k, v in value[key].items():
@@ -47,7 +47,7 @@ def update(scheme: dict[str, dict[str, str]], entry: str) -> str:
     return recursive(scheme, entry_type, entry)
 
 
-def scheme_resolver() -> dict[str, dict[str, str]]:
+def scheme_resolver() -> dict:
     """
     Asks if the user wants to use a custom scheme.
 
