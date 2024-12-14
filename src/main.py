@@ -1,6 +1,7 @@
 import sys
 import json
 import re
+import os
 
 from pathlib import Path
 
@@ -56,22 +57,20 @@ def scheme_resolver() -> dict:
     """
 
     while True:
-        scheme_name = "default.json"
+        scheme_path = Path(__file__).parent / "schemes/default.json"
 
         match input("Do you want to use a custom scheme? [y/n]: ").lower():
             case "y" | "yes":
-                scheme_name = Path(input("Scheme name: ")).with_suffix(".json")
-
+                scheme_path = Path(input("Scheme name: ")).with_suffix(".json")
             case "n" | "no":
                 print("Using default scheme...")
             case _:
                 continue
-
         try:
-            with open(f"deps/schemes/{scheme_name}", "r") as scheme_json:
+            with open(scheme_path, "r") as scheme_json:
                 return json.load(scheme_json)
         except FileNotFoundError:
-            input(f"Error: {scheme_name} not found!\nPress enter to exit...")
+            input(f"Error: {scheme_path.name} not found!\nPress enter to exit...")
             sys.exit(1)
         except json.JSONDecodeError as e:
             input(
