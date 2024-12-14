@@ -16,22 +16,6 @@ def update(scheme: dict, entry: str) -> str:
     Modifies the entry according to the scheme, then returns a str.
     """
 
-    def recursive(value: dict, key: str, entry: str):
-
-        if key in value:
-            for k, v in value[key].items():
-                if isinstance(v, str):
-                    if re.search(k, entry):
-                        entry = re.sub(rf"{k}.*(?=\n)", v, entry)
-                    else:
-                        splited_entry = entry.split("\n")
-                        splited_entry.insert(-1, f"    	{v}")
-                        entry = "\n".join(splited_entry)
-                elif k in entry_hash:
-                    entry = recursive(value[key], k, entry)
-
-        return entry
-
     entry_hash = RE_HASH.search(entry)
 
     if entry_hash:
@@ -44,6 +28,22 @@ def update(scheme: dict, entry: str) -> str:
 
     entry_type, _ = entry_hash.split("/")[-2:]
 
+    def recursive(value: dict, key: str, entry: str):
+
+        if key in value:
+            for k, v in value[key].items():
+                if isinstance(v, str):
+                    if re.search(k, entry):
+                        entry = re.sub(rf"{k}.*(?=\n)", v, entry)
+                    else:
+                        splited_entry = entry.split("\n")
+                        splited_entry.insert(-1, f"    	{v}")
+                        entry = "\n".join(splited_entry)
+                elif re.search(k, entry_hash):
+                    entry = recursive(value[key], k, entry)
+
+        return entry
+
     return recursive(scheme, entry_type, entry)
 
 
@@ -54,6 +54,7 @@ def scheme_resolver() -> dict:
     If so, it searches for a user specified .json file in the scheme folder, then returns it.
     Otherwise, it returns the default scheme.
     """
+
     while True:
         scheme_name = "default.json"
 
