@@ -60,7 +60,9 @@ def scheme_resolver() -> dict:
 
         match input("Do you want to use a custom scheme? [y/n]: ").lower():
             case "y" | "yes":
-                scheme_path = Path(input("Scheme name: ")).with_suffix(".json")
+                scheme_path = scheme_path.with_name(input("Scheme name: ")).with_suffix(
+                    ".json"
+                )
             case "n" | "no":
                 print("Using default scheme...")
             case _:
