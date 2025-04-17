@@ -12,12 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: macos-13
-            target: "--target-arch x86_64"
-            id: "macos-x86_64"
-          - platform: macos-latest
-            target: "--target-arch arm64"
-            id: "macos-arm64"
           - platform: windows-latest
             target: ""
             id: "windows"
@@ -44,7 +38,6 @@ jobs:
             --name league-ui-updater \
             --contents-directory deps \
             --add-data schemes:schemes \
-            --add-data assets:assets \
             --add-data src/lib/cslol_tools:cslol_tools \
             --add-data src/lib/ritobin:ritobin \
             --hidden-import=lib.cslol_tools \
