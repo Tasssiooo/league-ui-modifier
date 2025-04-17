@@ -39,11 +39,18 @@ jobs:
       - name: Build with pyinstaller
         shell: bash
         run: |
-          pyinstaller --onedir --console \
-            --icon "NONE" \
-            --name league-ui-modifier \
+          pyinstaller --onedir --clean --console \
+            --icon "icon.png" \
+            --name league-ui-updater \
             --contents-directory deps \
             --add-data schemes:schemes \
+            --add-data assets:assets \
+            --add-data src/lib/cslol_tools:cslol_tools \
+            --add-data src/lib/ritobin:ritobin \
+            --hidden-import=lib.cslol_tools \
+            --hidden-import=lib.ritobin \
+            --hidden-import=utils.configuration \
+            --hidden-import=utils.fs \
             ${{ matrix.target }} \
             src/main.py
 
