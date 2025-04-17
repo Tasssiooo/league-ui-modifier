@@ -15,3 +15,8 @@ dist/
 
 # Environments
 venv/
+
+UI/
+
+src/lib/cslol_tools/hashes.game.txt
+src/lib/ritobin/hashes/

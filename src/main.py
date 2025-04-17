@@ -1,14 +1,36 @@
 import sys
 import json
 import re
+import questionary
+import shutil
 
-from pathlib import Path
+from lib.cslol_tools import cslol_wad_extract, cslol_wad_make
+from lib.ritobin import cslol_ritobin
+from utils.configuration import get_league_folder_path, get_cslol_folder_path
+from utils.fs import make_meta_info, copy_assets, RELATIVE_PATH
 
 
 RE_ENTRIES = re.compile(r"\n    (?=\")")
 RE_HASH = re.compile(
     r"\"[\w/]+\"\s(?==)"
 )  # To ignore the scenes: \"[\w/]+(_\w+)+\"\s(?==)
+
+SCHEMES_BY_CATEGORY: dict[str, dict[str, dict[str, str]]] = {
+    "Health Bar": {
+        "Season 3 Health Bar": {
+            "author": "Xllwd",
+            "description": "15.something",
+            "version": "5.4",
+            "scheme": "season3healthbar.json",
+            "uibase": "clientstates/gameplay/ux/lol/lolfloatinginfobars/uibase",
+        },
+    },
+    "Loading Screen": {},
+    "Shop": {},
+    "Scoreboard": {},
+    "Settings": {},
+    "Ability Bar": {},
+}
 
 
 def update(scheme: dict, entry: str) -> str:
@@ -47,78 +69,115 @@ def update(scheme: dict, entry: str) -> str:
     return recursive(scheme, entry_type, entry)
 
 
-def scheme_resolver() -> dict:
-    """
-    Asks if the user wants to use a custom scheme.
+def scheme_resolver(scheme: str) -> None:
 
-    If so, it searches for a user specified .json file in the scheme folder, then returns it.
-    Otherwise, it returns the default scheme.
-    """
+    scheme_file = RELATIVE_PATH / "deps" / "schemes" / scheme
 
-    while True:
-        scheme_path = Path(__file__).parent / "schemes/default.json"
+    try:
+        return json.load(scheme_file.open("r"))
+    except json.JSONDecodeError as e:
 
-        match input("Do you want to use a custom scheme? [y/n]: ").lower():
-            case "y" | "yes":
-                scheme_path = scheme_path.with_name(input("Scheme name: ")).with_suffix(
-                    ".json"
-                )
-            case "n" | "no":
-                print("Using default scheme...")
-            case _:
-                continue
-        try:
-            with open(scheme_path, "r") as scheme_json:
-                return json.load(scheme_json)
-        except FileNotFoundError:
-            input(f"Error: {scheme_path.name} not found!\nPress enter to exit...")
+        input(
+            f"Error: Your scheme file is bad formatted.\n{e.msg}\nPress enter to exit..."
+        )
+
+        sys.exit(1)
+
+
+def main() -> None:
+
+    if get_league_folder_path() and get_cslol_folder_path():
+
+        category = questionary.select(
+            "What UI part do you want to modify?",
+            choices=[category for category in SCHEMES_BY_CATEGORY],
+        ).ask()
+
+        name = questionary.select(
+            "What scheme do you want to use?",
+            choices=[name for name in SCHEMES_BY_CATEGORY[category]],
+        ).ask()
+
+        selected_mod = SCHEMES_BY_CATEGORY[category][name]
+
+        mod_dir = RELATIVE_PATH / name
+        bin_dir = (mod_dir / selected_mod["uibase"]).parent
+
+        uibase_bin = RELATIVE_PATH / "UI" / selected_mod["uibase"]
+        uibase_dst = bin_dir / uibase_bin.with_suffix(".py").name
+
+        if not uibase_bin.exists():
+
+            cslol_wad_extract()
+
+        uibase_py = cslol_ritobin(uibase_bin, uibase_dst)
+
+        if not uibase_py:
+
+            print("Something went wrong!")
             sys.exit(1)
-        except json.JSONDecodeError as e:
-            input(
-                f"Error: Your json file is bad formatted.\n{e.msg}\nPress enter to exit..."
-            )
+
+        if not uibase_py.readline() == "#PROP_text\n":
+
+            print("Bin file bad formatted!")
             sys.exit(1)
 
+        scheme_dict = scheme_resolver(selected_mod["scheme"])
 
-def main(argv: list[str]) -> None:
-    for i in range(len(argv)):
-        arg = argv[i]
+        uibase_content = uibase_py.read()
+        uibase_entries = RE_ENTRIES.split(uibase_content)
 
-        try:
-            with open(arg, "r") as uibase:
-                # Checks if the file probably has a bin format;
-                if uibase.readline() == "#PROP_text\n":
-                    outname = Path(arg).with_suffix(".mod.py")
-                    scheme = scheme_resolver()
+        for i in range(1, len(uibase_entries)):
 
-                    uibase_content = uibase.read()
-                    uibase_entries = RE_ENTRIES.split(uibase_content)
+            entry = uibase_entries[i]
 
-                    # 'entries' is formatted as a map (map[hash, embed]), that pattern allows us
-                    # to split the uibase content using '\n    (?=\")' and iterate through them;
-                    for i in range(1, len(uibase_entries)):
-                        entry = uibase_entries[i]
+            uibase_entries[i] = update(scheme_dict, entry)
 
-                        uibase_entries[i] = update(scheme, entry)
+        uibase_py.close()
 
-                    with open(outname, "w") as uibase_mod:
-                        uibase_entries.insert(0, "#PROP_text")
-                        uibase_mod.write("\n".join(uibase_entries))
+        with open(uibase_dst, "w") as uibase_mod:
 
-                else:
-                    print(f"Error: {arg} probably doesn't have a bin format!")
+            uibase_entries.insert(0, "#PROP_text")
+            uibase_mod.write("\n".join(uibase_entries))
 
-                    if i == len(argv) - 1:
-                        input("Press enter to exit...")
-                        sys.exit(1)
+        uibase_mod_bin = cslol_ritobin(uibase_dst, uibase_dst.with_suffix(".bin"))
 
-        except FileNotFoundError:
-            print(f"Error: {arg} not found!")
+        if uibase_mod_bin:
 
-            if i == len(argv) - 1:
-                input("Press enter to exit...")
-                sys.exit(1)
+            uibase_mod_bin.name.removesuffix(".bin")
+
+        uibase_dst.unlink()
+
+        copy_assets(RELATIVE_PATH / "deps" / "assets" / name, mod_dir)
+
+        cslol_installed_dir = get_cslol_folder_path() / "installed"
+
+        mod_pkg_name = name + " (by Xllwd)"
+        mod_pkg_dir = cslol_installed_dir / mod_pkg_name
+        mod_pkg_meta_dir = mod_pkg_dir / "META"
+        mod_pkg_wad_dir = mod_pkg_dir / "WAD"
+
+        if not mod_pkg_dir.exists():
+            mod_pkg_dir.mkdir()
+        if not mod_pkg_meta_dir.exists():
+            mod_pkg_meta_dir.mkdir()
+        if not mod_pkg_wad_dir.exists():
+            mod_pkg_wad_dir.mkdir()
+
+        make_meta_info(
+            mod_pkg_meta_dir,
+            selected_mod["author"],
+            selected_mod["description"],
+            name,
+            selected_mod["version"],
+        )
+
+        cslol_wad_make(mod_dir, mod_pkg_wad_dir / "UI.wad.client")
+        # Cleanup
+        shutil.rmtree(mod_dir)
+
+        print("Done!")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()

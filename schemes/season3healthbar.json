@@ -1,0 +1,163 @@
+{
+  "ParTypeData": {
+    "ChampPAR": {
+      "position: vec2": "position: vec2 = { 163, 124 }",
+      "Size": "Size: vec2 = { 104, 3 }",
+      "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/ParDefault.dds\"",
+      "mTextureSourceResolutionWidth": "mTextureSourceResolutionWidth: u32 = 256",
+      "mTextureSourceResolutionHeight": "mTextureSourceResolutionHeight: u32 = 256",
+      "mTextureUV": "mTextureUV: vec4 = { 140, 47, 244, 50 }",
+      "BarTextureRed": {
+        "color: rgba": "color: rgba = { 0, 0, 255, 255 }"
+      },
+      "BarTextureGrey": {
+        "color: rgba": "color: rgba = { 155, 155, 155, 255 }"
+      },
+      "BarTextureYellow": {
+        "color: rgba": "color: rgba = { 35, 165, 168, 255 }"
+      },
+      "BarTextureBlack": {
+        "color: rgba": "color: rgba = { 0, 0, 0, 255 }"
+      },
+      "BarTextureBlue": {
+        "color: rgba": "color: rgba = { 178, 93, 15, 255 }"
+      },
+      "BarTextureLgtBlue": {
+        "color: rgba": "color: rgba = { 255, 155, 0, 255 }"
+      },
+      "BarTextureOrange": {
+        "color: rgba": "color: rgba = { 64, 128, 255, 255 }"
+      },
+      "BarTextureGreen": {
+        "color: rgba": "color: rgba = { 0, 170, 0, 255 }"
+      },
+      "BarTexturePurple": {
+        "color: rgba": "color: rgba = { 240, 30, 170, 255 }"
+      }
+    },
+    "ChampSAR": {}
+  },
+  "Meters": {
+    "ChampHP": {
+      "position: vec2": "position: vec2 = { 163, 114 }",
+      "Size": "Size: vec2 = { 104, 9 }",
+      "BarFade(Enemy|BurstRed|Burst)?\"": {
+        "color: rgba": "color: rgba = { 0, 0, 255, 255 }",
+        "mTextureUV": "mTextureUV: vec4 = { 147, 76, 258, 87 }"
+      },
+      "BarTextureGreen": {
+        "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/ChampHP_BarTextures.tex\"",
+        "mTextureSourceResolutionWidth": "mTextureSourceResolutionWidth: u32 = 104",
+        "mTextureSourceResolutionHeight": "mTextureSourceResolutionHeight: u32 = 104",
+        "mTextureUV": "mTextureUV: vec4 = { 0, 0, 104, 9 }"
+      },
+      "ShieldBarTexture": {
+        "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/ChampHP_BarTextures.tex\"",
+        "mTextureSourceResolutionWidth": "mTextureSourceResolutionWidth: u32 = 104",
+        "mTextureSourceResolutionHeight": "mTextureSourceResolutionHeight: u32 = 104",
+        "PShield": {
+          "mTextureUV": "mTextureUV: vec4 = { 0, 78, 104, 87 }"
+        },
+        "MShield": {
+          "mTextureUV": "mTextureUV: vec4 = { 147, 160, 258, 171 }"
+        },
+        "AShield": {
+          "mTextureUV": "mTextureUV: vec4 = { 147, 28, 258, 39 }"
+        }
+      },
+      "BarFlash": {
+        "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/Null.tex\""
+      }
+    }
+  },
+  "TicksTips": {
+    "ChampHP": {
+      "_Tick": {
+        "position: vec2": "position: vec2 = { 163, 114 }",
+        "Size": "Size: vec2 = { 2, 9 }"
+      },
+      "MicroTick": {
+        "position: vec2": "position: vec2 = { 163, 114 }",
+        "Size": "Size: vec2 = { 1, 6 }"
+      }
+    }
+  },
+  "Borders": {
+    "ChampFHB": {
+      "position: vec2": "position: vec2 = { 136, 111 }",
+      "Size": "Size: vec2 = { 134, 27 }",
+      "AnchorBase": {
+        "position: vec2": "position: vec2 = { 208, 141 }",
+        "Size": "Size: vec2 = { 1, 1 }"
+      },
+      "Highlight": {
+        "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/Null.tex\""
+      },
+      "LevelBox": {
+        "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/healthbarsDefault.tex\"",
+        "mTextureSourceResolutionWidth": "mTextureSourceResolutionWidth: u32 = 256",
+        "mTextureSourceResolutionHeight": "mTextureSourceResolutionHeight: u32 = 512",
+        "Default": {
+          "Self": {
+            "mTextureUV": "mTextureUV: vec4 = { 30, 13, 164, 40 }"
+          },
+          "Red": {
+            "FlipX": "FlipX: bool = true",
+            "mTextureUV": "mTextureUV: vec4 = { 31, 136, 165, 163 }"
+          },
+          "Yellow": {
+            "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/healthbarsColorblind.tex\"",
+            "mTextureUV": "mTextureUV: vec4 = { 30, 13, 164, 40 }"
+          },
+          "Blue": {
+            "FlipX": "FlipX: bool = true",
+            "mTextureUV": "mTextureUV: vec4 = { 31, 74, 165, 101 }"
+          }
+        },
+        "Executable": {},
+        "SpellShield": {},
+        "HasAttachedAlly": {},
+        "Invuln": {}
+      },
+      "Border_": {
+        "SpellShield": {
+          "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/Null.tex\""
+        },
+        "Executable": {
+          "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/healthbarsDefault.tex\"",
+          "mTextureSourceResolutionWidth": "mTextureSourceResolutionWidth: u32 = 256",
+          "mTextureSourceResolutionHeight": "mTextureSourceResolutionHeight: u32 = 512",
+          "mTextureUV": "mTextureUV: vec4 = { 31, 136, 165, 163 }"
+        },
+        "Default": {
+          "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/Null.tex\""
+        },
+        "HasAttachedAlly": {
+          "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/Null.tex\""
+        },
+        "Invuln": {
+          "mTextureName": "mTextureName: string = \"ASSETS/UX/FloatingHealthBars/Null.tex\""
+        }
+      },
+      "FxIn": {
+        "HasAttachedAlly": {
+          "position: vec2": "position: vec2 = { 136, 111 }"
+        }
+      }
+    }
+  },
+  "Text": {
+    "ChampFHB": {
+      "Text": {
+        "Name": {
+          "position: vec2": "position: vec2 = { 139, 96 }",
+          "FontDescription": "FontDescription: link = \"UX/Fonts/Descriptions/HealthBarTitle\""
+        },
+        "Level": {
+          "position: vec2": "position: vec2 = { 142, 119 }",
+          "FontDescription": "FontDescription: link = \"UX/Fonts/Descriptions/HealthBarLevel\""
+        }
+      }
+    }
+  }
+}
