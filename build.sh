@@ -1,5 +1,5 @@
 pyinstaller --onedir --clean --console \
-  --icon "icon.png" \
+  --icon "icon.ico" \
   --name league-ui-updater \
   --contents-directory deps \
   --add-data schemes:schemes \
