@@ -50,6 +50,7 @@ jobs:
       - name: Package
         shell: bash
         run: |
+          ls
           mv ./dist/league-ui-modifier/ ./
           7z a league-ui-modifier-${{ matrix.id }}.zip league-ui-modifier/
 
