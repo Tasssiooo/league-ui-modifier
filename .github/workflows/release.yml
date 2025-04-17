@@ -13,7 +13,6 @@ jobs:
       matrix:
         include:
           - platform: windows-latest
-            target: ""
             id: "windows"
     runs-on: ${{ matrix.platform }}
     steps:
@@ -44,15 +43,13 @@ jobs:
             --hidden-import=lib.ritobin \
             --hidden-import=utils.configuration \
             --hidden-import=utils.fs \
-            ${{ matrix.target }} \
             src/main.py
 
       - name: Package
         shell: bash
         run: |
-          ls
-          mv ./dist/league-ui-modifier/ ./
-          7z a league-ui-modifier-${{ matrix.id }}.zip league-ui-modifier/
+          ls ./dist
+          7z a league-ui-modifier-${{ matrix.id }}.zip dist/
 
       - name: Release
         uses: softprops/action-gh-release@v2
