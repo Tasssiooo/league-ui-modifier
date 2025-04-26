@@ -3,7 +3,6 @@ pyinstaller --onedir --clean --console \
   --name league-ui-updater \
   --contents-directory deps \
   --add-data schemes:schemes \
-  --add-data assets:assets \
   --add-data src/lib/cslol_tools:cslol_tools \
   --add-data src/lib/ritobin:ritobin \
   --hidden-import=lib.cslol_tools \
