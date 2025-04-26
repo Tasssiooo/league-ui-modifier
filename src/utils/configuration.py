@@ -51,7 +51,6 @@ def get_cslol_folder_path() -> Path:
         or not config.has_option("General", "cslolFolderPath")
         or not config.get("General", "cslolFolderPath")
     ):
-
         root = tk.Tk()
         root.withdraw()
 
@@ -60,11 +59,10 @@ def get_cslol_folder_path() -> Path:
         )
 
         if not cslol_folder_path:
-
+            print("You must set the path of your cslol-manager!!!")
             sys.exit(1)
 
         if not config.has_section("General"):
-
             config.add_section("General")
 
         config.set("General", "cslolFolderPath", cslol_folder_path)
