@@ -21,7 +21,6 @@ def get_league_folder_path() -> Path:
         or not config.has_option("General", "leagueFolderPath")
         or not config.get("General", "leagueFolderPath")
     ):
-
         root = tk.Tk()
         root.withdraw()
 
@@ -30,11 +29,10 @@ def get_league_folder_path() -> Path:
         )
 
         if not league_folder_path:
-
+            print("You must set the path of your League folder!!!")
             sys.exit(1)
 
         if not config.has_section("General"):
-
             config.add_section("General")
 
         config.set("General", "leaguefolderpath", league_folder_path)
