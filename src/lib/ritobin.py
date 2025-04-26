@@ -14,6 +14,11 @@ COMMUNITY_DRAGON_HASHTABLE = (
 
 def fetch_hashtables():
 
+    hashes_dir = RITOBIN_CLI.parent / "hashes"
+
+    if not hashes_dir.exists():
+        hashes_dir.mkdir()
+
     names = ["binentries", "binfields", "binhashes", "bintypes", "lcu", "rst", "game"]
 
     for name in names:
@@ -21,13 +26,13 @@ def fetch_hashtables():
             for n in range(2):
                 r = requests.get(COMMUNITY_DRAGON_HASHTABLE.format(name) + f".{n}")
 
-                with open("./hashes.game.txt", "a") as hashes_game_txt:
+                with open(hashes_dir / "hashes.game.txt", "a") as hashes_game_txt:
                     hashes_game_txt.write(r.content.decode("utf-8"))
             break
 
         r = requests.get(COMMUNITY_DRAGON_HASHTABLE.format(name))
 
-        with open(f"./hashes.{name}.txt", "w") as hashes_x_txt:
+        with open(hashes_dir / f"./hashes.{name}.txt", "w") as hashes_x_txt:
             hashes_x_txt.write(r.content.decode("utf-8"))
 
 
