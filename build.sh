@@ -1,4 +1,4 @@
-pyinstaller --onedir --clean \
+pyinstaller --onedir --clean --console \
   --icon "icon.ico" \
   --name league-ui-updater \
   --contents-directory deps \
