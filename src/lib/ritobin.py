@@ -44,7 +44,3 @@ def cslol_ritobin(src: Path, dst: Path):
 
     if not ritobin_cli_exe.returncode:
         return dst.open("r")
-
-
-if __name__ == "__main__":
-    fetch_hashtables()
