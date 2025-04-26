@@ -15,7 +15,7 @@ RE_HASH = re.compile(
     r"\"[\w/]+\"\s(?==)"
 )  # To ignore the scenes: \"[\w/]+(_\w+)+\"\s(?==)
 
-SCHEMES_BY_CATEGORY: dict[str, dict[str, dict[str, str]]] = {
+MODS_BY_CATEGORY: dict[str, dict[str, dict[str, str]]] = {
     "Health Bar": {
         "Season 3 Health Bar": {
             "author": "Xllwd",
@@ -92,15 +92,15 @@ def main() -> None:
 
         category = questionary.select(
             "What UI part do you want to modify?",
-            choices=[category for category in SCHEMES_BY_CATEGORY],
+            choices=[category for category in MODS_BY_CATEGORY],
         ).ask()
 
         name = questionary.select(
             "What scheme do you want to use?",
-            choices=[name for name in SCHEMES_BY_CATEGORY[category]],
+            choices=[name for name in MODS_BY_CATEGORY[category]],
         ).ask()
 
-        selected_mod = SCHEMES_BY_CATEGORY[category][name]
+        selected_mod = MODS_BY_CATEGORY[category][name]
 
         mod_dir = RELATIVE_PATH / name
         bin_dir = (mod_dir / selected_mod["uibase"]).parent
