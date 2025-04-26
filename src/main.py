@@ -5,7 +5,7 @@ import questionary
 import shutil
 
 from lib.cslol_tools import cslol_wad_extract, cslol_wad_make
-from lib.ritobin import cslol_ritobin
+from lib.ritobin import cslol_ritobin, fetch_hashtables
 from utils.configuration import get_league_folder_path, get_cslol_folder_path
 from utils.fs import make_meta_info, copy_assets, RELATIVE_PATH
 
@@ -85,6 +85,8 @@ def scheme_resolver(scheme: str) -> None:
 
 
 def main() -> None:
+
+    fetch_hashtables()
 
     if get_league_folder_path() and get_cslol_folder_path():
 
