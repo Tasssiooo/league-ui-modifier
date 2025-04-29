@@ -50,7 +50,9 @@ def get_mod_file() -> IO:
     )
 
     if not file:
-        print("You must select the file of the mod you want to update!")
+        input(
+            "You must select the file of the mod you want to update!\nPress Enter to exit..."
+        )
         sys.exit(1)
 
     return file
