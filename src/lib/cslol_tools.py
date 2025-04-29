@@ -1,7 +1,6 @@
 import subprocess
 
 from pathlib import Path
-from utils.configuration import get_league_folder_path
 from utils.fs import RELATIVE_PATH
 
 
@@ -20,11 +19,7 @@ def cslol_wad_make(src: Path, dst: Path) -> Path:
     return dst
 
 
-def cslol_wad_extract() -> None:
-
-    src = get_league_folder_path() / UI_WAD
-
-    dst = RELATIVE_PATH / "UI"
+def cslol_wad_extract(src: Path, dst: Path) -> None:
 
     print("Extracting UI files...")
 
