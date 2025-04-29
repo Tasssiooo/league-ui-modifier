@@ -14,6 +14,8 @@ COMMUNITY_DRAGON_HASHTABLE = (
 
 def fetch_hashtables():
 
+    print("Downloading hashtables...")
+
     hashes_dir = RITOBIN_CLI.parent / "hashes"
 
     if not hashes_dir.exists():
@@ -34,6 +36,8 @@ def fetch_hashtables():
 
         with open(hashes_dir / f"./hashes.{name}.txt", "w") as hashes_x_txt:
             hashes_x_txt.write(r.content.decode("utf-8"))
+
+    print("Hashtables downloading finished!")
 
 
 def cslol_ritobin(src: Path, dst: Path):

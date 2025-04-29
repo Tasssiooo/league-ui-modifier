@@ -86,11 +86,7 @@ def scheme_resolver(scheme: str) -> None:
 
 def main() -> None:
 
-    print("Downloading hashtables...")
-
     fetch_hashtables()
-
-    print("Hashtables downloading finished!")
 
     if get_league_folder_path() and get_cslol_folder_path():
 
