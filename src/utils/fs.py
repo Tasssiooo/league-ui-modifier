@@ -38,9 +38,9 @@ def copy_assets(src: Path, dst: Path) -> None:
     shutil.copytree(src, dst, dirs_exist_ok=True)
 
 
-def get_mod_file() -> IO:
+def get_mod_filename() -> str:
 
-    file = filedialog.askopenfile(
+    file = filedialog.askopenfilename(
         title="Select the file of the mod you want to update",
         filetypes=(
             ("fantome files", "*.fantome"),

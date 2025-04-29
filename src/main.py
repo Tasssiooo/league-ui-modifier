@@ -8,7 +8,7 @@ import tkinter as tk
 from lib.cslol_tools import cslol_wad_extract, cslol_wad_make
 from lib.ritobin import cslol_ritobin, fetch_hashtables
 from utils.configuration import get_league_folder_path, get_cslol_folder_path
-from utils.fs import make_meta_info, copy_assets, get_mod_file, RELATIVE_PATH
+from utils.fs import make_meta_info, copy_assets, get_mod_filename, RELATIVE_PATH
 
 
 RE_ENTRIES = re.compile(r"\n    (?=\")")
@@ -104,7 +104,7 @@ def main() -> None:
             choices=[name for name in MODS_BY_CATEGORY[category]],
         ).ask()
 
-        mod_file = get_mod_file()
+        mod_filename = get_mod_filename()
 
         root.destroy()
 
