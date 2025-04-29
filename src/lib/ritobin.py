@@ -40,7 +40,6 @@ def cslol_ritobin(src: Path, dst: Path):
 
     ritobin_cli_exe = subprocess.run(
         [
-            "wine",
             RITOBIN_CLI,
             src,
             dst,

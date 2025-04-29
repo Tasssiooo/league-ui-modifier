@@ -13,7 +13,7 @@ UI_WAD = "Game/DATA/FINAL/UI.wad.client"
 
 def cslol_wad_make(src: Path, dst: Path) -> Path:
 
-    subprocess.run(["wine", WAD_MAKE, src, dst])
+    subprocess.run([WAD_MAKE, src, dst])
 
     return dst
 
@@ -26,7 +26,7 @@ def cslol_wad_extract() -> None:
 
     print("Extracting UI files...")
 
-    wad_extract_exe = subprocess.run(["wine", WAD_EXTRACT, src, dst])
+    wad_extract_exe = subprocess.run([WAD_EXTRACT, src, dst])
 
     if not wad_extract_exe.returncode:
 
