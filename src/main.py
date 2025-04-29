@@ -110,7 +110,7 @@ def main() -> None:
 
         selected_mod = MODS_BY_CATEGORY[category][name]
 
-        mod_dir = RELATIVE_PATH / name
+        """ mod_dir = RELATIVE_PATH / name
         bin_dir = (mod_dir / selected_mod["uibase"]).parent
 
         uibase_bin = RELATIVE_PATH / "UI" / selected_mod["uibase"]
@@ -184,7 +184,7 @@ def main() -> None:
 
         cslol_wad_make(mod_dir, mod_pkg_wad_dir / "UI.wad.client")
         # Cleanup
-        shutil.rmtree(mod_dir)
+        shutil.rmtree(mod_dir) """
 
         print("Done!")
 
