@@ -49,7 +49,7 @@ def fetch_hashtables():
     print("Hashtables downloading finished!\n")
 
 
-def cslol_ritobin(src: Path, dst: Path):
+def ritobin_cli(src: Path, dst: Path):
 
     ritobin_cli_exe = subprocess.run(
         [RITOBIN_CLI, src, dst, "-d", HASHES_DIR],
