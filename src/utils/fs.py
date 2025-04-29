@@ -2,6 +2,7 @@ import os
 import json
 import shutil
 import sys
+import tkinter as tk
 
 from pathlib import Path
 from tkinter import filedialog
@@ -39,7 +40,10 @@ def copy_assets(src: Path, dst: Path) -> None:
 
 def get_mod_file() -> IO:
 
-    file = filedialog.askopenfile(
+    root = tk.Tk()
+    root.withdraw()
+
+    file = filedialog.askopenfilename(
         title="Select the file of the mod you want to update",
         filetypes=(
             ("fantome files", "*.fantome"),
