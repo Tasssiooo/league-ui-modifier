@@ -44,7 +44,9 @@ def fetch_hashtables():
         with open(hash_file, "w") as hashes_x_txt:
             hashes_x_txt.write(r.content.decode("utf-8"))
 
-    print("Hashtables downloading finished!")
+            print(f"{hash_file.name} downloaded")
+
+    print("Hashtables downloading finished!\n")
 
 
 def cslol_ritobin(src: Path, dst: Path):
