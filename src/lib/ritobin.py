@@ -60,4 +60,4 @@ def cslol_ritobin(src: Path, dst: Path):
     )
 
     if not ritobin_cli_exe.returncode:
-        return dst.open("r")
+        return dst.open("r+")
