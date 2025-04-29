@@ -8,6 +8,8 @@ from utils.fs import RELATIVE_PATH
 WAD_MAKE = RELATIVE_PATH / "deps" / "cslol_tools" / "wad-make.exe"
 WAD_EXTRACT = RELATIVE_PATH / "deps" / "cslol_tools" / "wad-extract.exe"
 
+HASHDICT = RELATIVE_PATH / "deps" / "hashes" / "hashes.game.txt"
+
 UI_WAD = "Game/DATA/FINAL/UI.wad.client"
 
 
@@ -26,7 +28,7 @@ def cslol_wad_extract() -> None:
 
     print("Extracting UI files...")
 
-    wad_extract_exe = subprocess.run([WAD_EXTRACT, src, dst])
+    wad_extract_exe = subprocess.run([WAD_EXTRACT, src, dst, HASHDICT])
 
     if not wad_extract_exe.returncode:
 
