@@ -21,9 +21,6 @@ def get_league_folder_path() -> Path:
         or not config.has_option("General", "leagueFolderPath")
         or not config.get("General", "leagueFolderPath")
     ):
-        root = tk.Tk()
-        root.withdraw()
-
         league_folder_path = filedialog.askdirectory(
             title="Select your League folder path",
         )
@@ -51,9 +48,6 @@ def get_cslol_folder_path() -> Path:
         or not config.has_option("General", "cslolFolderPath")
         or not config.get("General", "cslolFolderPath")
     ):
-        root = tk.Tk()
-        root.withdraw()
-
         cslol_folder_path = filedialog.askdirectory(
             title="Select your cslol folder path",
         )

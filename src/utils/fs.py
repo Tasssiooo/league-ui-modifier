@@ -40,9 +40,6 @@ def copy_assets(src: Path, dst: Path) -> None:
 
 def get_mod_file() -> IO:
 
-    root = tk.Tk()
-    root.withdraw()
-
     file = filedialog.askopenfilename(
         title="Select the file of the mod you want to update",
         filetypes=(
