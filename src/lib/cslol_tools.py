@@ -21,10 +21,4 @@ def cslol_wad_make(src: Path, dst: Path) -> Path:
 
 def cslol_wad_extract(src: Path, dst: Path) -> None:
 
-    print("Extracting UI files...")
-
     wad_extract_exe = subprocess.run([WAD_EXTRACT, src, dst, HASHDICT])
-
-    if not wad_extract_exe.returncode:
-
-        print("UI files extracted succesfully!")
