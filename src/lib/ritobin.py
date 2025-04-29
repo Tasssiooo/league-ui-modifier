@@ -51,10 +51,8 @@ def fetch_hashtables():
 
 def cslol_ritobin(src: Path, dst: Path):
 
-    hashes_game_txt = HASHES_DIR / "hashes.game.txt"
-
     ritobin_cli_exe = subprocess.run(
-        [RITOBIN_CLI, src, dst, "-d", hashes_game_txt],
+        [RITOBIN_CLI, src, dst, "-d", HASHES_DIR],
     )
 
     if not ritobin_cli_exe.returncode:
