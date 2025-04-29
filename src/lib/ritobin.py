@@ -24,8 +24,15 @@ def fetch_hashtables():
     names = ["binentries", "binfields", "binhashes", "bintypes", "lcu", "rst", "game"]
 
     for name in names:
+        hash_file = hashes_dir / f"./hashes.{name}.txt"
+
         if name == "game":
             for n in range(2):
+                hash_file = hashes_dir / "hashes.game.txt"
+
+                if hash_file.exists():
+                    hash_file.unlink()
+
                 r = requests.get(COMMUNITY_DRAGON_HASHTABLE.format(name) + f".{n}")
 
                 with open(hashes_dir / "hashes.game.txt", "a") as hashes_game_txt:
@@ -34,7 +41,7 @@ def fetch_hashtables():
 
         r = requests.get(COMMUNITY_DRAGON_HASHTABLE.format(name))
 
-        with open(hashes_dir / f"./hashes.{name}.txt", "w") as hashes_x_txt:
+        with open(hash_file, "w") as hashes_x_txt:
             hashes_x_txt.write(r.content.decode("utf-8"))
 
     print("Hashtables downloading finished!")
