@@ -22,7 +22,7 @@ jobs:
       - name: Python setup
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: Install dependencies
         run: |
@@ -32,7 +32,7 @@ jobs:
       - name: Build with pyinstaller
         shell: bash
         run: |
-          pyinstaller --onedir --clean --console \
+          pyinstaller --onedir --clean --console --noconfirm \
             --icon "icon.ico" \
             --name league-ui-updater \
             --contents-directory deps \
