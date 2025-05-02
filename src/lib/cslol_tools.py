@@ -9,8 +9,6 @@ WAD_EXTRACT = RELATIVE_PATH / "deps" / "cslol_tools" / "wad-extract.exe"
 
 HASHDICT = RELATIVE_PATH / "deps" / "hashes" / "hashes.game.txt"
 
-UI_WAD = "Game/DATA/FINAL/UI.wad.client"
-
 
 def cslol_wad_make(src: Path, dst: Path) -> Path:
 
