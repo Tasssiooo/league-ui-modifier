@@ -30,9 +30,9 @@ def main() -> None:
     root = tk.Tk()
     root.withdraw()
 
-    fetch_hashtables()
-
     if get_league_folder_path() and get_cslol_folder_path():
+
+        fetch_hashtables()
 
         category = questionary.select(
             "What UI part do you want to modify?",
