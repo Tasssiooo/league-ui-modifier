@@ -1,10 +1,9 @@
 import sys
-import tkinter as tk
 
 from tkinter import filedialog
 from pathlib import Path
 from configparser import ConfigParser
-from .fs import RELATIVE_PATH
+from fs import RELATIVE_PATH
 
 
 CONFIG_FILE = RELATIVE_PATH / "config.ini"
