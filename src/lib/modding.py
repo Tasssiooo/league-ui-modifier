@@ -9,6 +9,7 @@ from typing import Any
 
 from .cslol_tools import cslol_wad_extract, cslol_wad_make
 from .ritobin import ritobin_cli
+from utils.configuration import get_cslol_folder_path
 from utils.fs import RELATIVE_PATH
 
 
@@ -107,7 +108,13 @@ def update_from_wad(wad: Path, mod: dict[str, str]) -> None:
 
 def update_from_zip(zip: Path, mod: dict[str, str]) -> None:
 
-    unzipped = zip.with_suffix("")
+    cslol_path = get_cslol_folder_path()
+
+    unzipped = (
+        cslol_path
+        / "installed"
+        / zip.name.removesuffix(".zip").removesuffix(".fantome")
+    )
 
     with ZipFile(zip, "r") as zip_ref:
         zip_ref.extractall(unzipped)
