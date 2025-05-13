@@ -44,8 +44,7 @@ jobs:
       - name: Package
         shell: bash
         run: |
-          cd dist/
-          7z a league-ui-modifier.zip league-ui-modifier/
+          7z a league-ui-modifier.zip dist/
 
       - name: Release
         uses: softprops/action-gh-release@v2
