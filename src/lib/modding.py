@@ -7,8 +7,8 @@ from zipfile import ZipFile
 from pathlib import Path
 from typing import Any
 
-from cslol_tools import cslol_wad_extract, cslol_wad_make
-from ritobin import ritobin_cli
+from .cslol_tools import cslol_wad_extract, cslol_wad_make
+from .ritobin import ritobin_cli
 from utils.fs import RELATIVE_PATH
 
 
