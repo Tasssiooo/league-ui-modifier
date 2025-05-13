@@ -38,6 +38,8 @@ def fetch_hashtables():
 
                 with open(HASHES_DIR / "hashes.game.txt", "a") as hashes_game_txt:
                     hashes_game_txt.write(r.content.decode("utf-8"))
+
+                print(f"hashes.game.txt downloaded")
             break
 
         r = requests.get(COMMUNITY_DRAGON_HASHTABLE.format(name))
