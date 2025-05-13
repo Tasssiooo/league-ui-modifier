@@ -1,5 +1,6 @@
 import subprocess
 import requests
+import os
 
 from pathlib import Path
 from utils.fs import RELATIVE_PATH
@@ -47,6 +48,8 @@ def fetch_hashtables():
             print(f"{hash_file.name} downloaded")
 
     print("Hashtables downloading finished!\n")
+
+    os.system("cls")
 
 
 def ritobin_cli(src: Path, dst: Path, outype: str):
