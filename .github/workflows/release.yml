@@ -10,11 +10,7 @@ jobs:
       contents: write
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - platform: windows-latest
-            id: "windows"
-    runs-on: ${{ matrix.platform }}
+    runs-on: windows-latest
     steps:
       - name: Clone source
         uses: actions/checkout@v4
@@ -49,9 +45,9 @@ jobs:
         shell: bash
         run: |
           ls ./dist
-          7z a league-ui-modifier-${{ matrix.id }}.zip dist/
+          7z a league-ui-modifier.zip dist/
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: league-ui-modifier-${{ matrix.id }}.zip
+          files: league-ui-modifier.zip
